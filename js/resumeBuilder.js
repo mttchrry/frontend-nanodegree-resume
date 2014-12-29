@@ -1,48 +1,46 @@
-var name = "Matt Cherry";
-name
+
+
 var contact = {
-	"mobile" : "419-you-wish",
-	"email" : "osumathias@yahoo",
-	"github" : "mttchrry",
-	"location" : "Cleveland, OH"
-}
+    "mobile" : "419-you-wish",
+    "email" : "osumathias@yahoo",
+    "github" : "https://github.com/mttchrry/",
+    "twitter" : "",
+    "location" : "Cleveland, OH"
+};
 
 var bio = {
-	"name" : name,
+	"name" : "Matt Cherry",
 	"role" : "Software Engineer",
-	"contacts" : contact,
-	"pictureUrl" : "https://media.licdn.com/media/p/2/000/0ac/1b3/03c6983.jpg",
-	"welcomeMsg" : "Why, Hello there.",
-	"skills" : ["Mad skillz yo", "Yep, the maddest"]
+	"contacts" : [contact],
+	"welcomeMessage" : "Why, Hello there.",
+	"skills" : ["Mad skillz yo", "Yep, the maddest"],
+	"biopic" : "https://media.licdn.com/media/p/2/000/0ac/1b3/03c6983.jpg"
 };
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-
-var formCont = HTMLemail.replace("%data%", bio.contacts.email);
-var formPic = HTMLbioPic.replace("%data%", bio.pictureUrl);
-var formWelcome = HTMLWelcomeMsg.replace("%data%", bio.welcomeMsg);
-
-var work = {
-	"employer" : "Rockwell Automation"
+bio.display = function(){
+	var formattedName = HTMLheaderName.replace("%data%", this.name),
+	  formattedRole = HTMLheaderRole.replace("%data%", this.role),
+	  formEmail = HTMLemail.replace("%data%", this.contacts[0].email),
+	  formPic = HTMLbioPic.replace("%data%", this.biopic),
+	  formWelcome = HTMLWelcomeMsg.replace("%data%", this.welcomeMessage),
+	  i = 0;
+	$("#header").append(formWelcome);
+	$("#header").append(formPic);
+	$("#header").prepend(formattedRole);
+	$("#header").prepend(formattedName);
+	if(this.skills.length > 0) {
+		$("#header").append(HTMLskillsStart);
+		for (i; i< this.skills.length; i=i+1) {
+			$("#skills").append(HTMLskills.replace("%data%", this.skills[i]));
+		};
+	};
+	$("#topContacts").append(formEmail);
+	$("#topContacts").append(HTMLgithub.replace("%data%", this.contacts[0].github));
+	$("#topContacts").append(HTMLmobile.replace("%data%", this.contacts[0].mobile));
+	$("#topContacts").append(HTMLlocation.replace("%data%", this.contacts[0].location));
 };
-work.position = bio.role;
-work.years = "Jan 2010 - Present";
-work.location = "Mayfield Heights, OH";
-work.description = "Development of Enterprise Software features delivering customer valued content in new releases of Rockwell Automation's LogixDesigner software suite.";
 
-var work
-
-var jobs = [
-	 work,	
-	 {
-		"employer" : "Rockwell Automation",
-		"position" : "Software Co-op",
-		"years" : "Jan 2008 - Aug 2009",
-		"location" : "Mayfield Heights, OH",
-		"description" : "Software Co-op for the RsLogix5000 development team working on low hanging fruit projects in C++ and C#, as well as learning object oriented desing principles and applying them."		
-	}
-]
+bio.display();
 
 var projects = {
 	"projects" : [
@@ -60,6 +58,62 @@ var projects = {
 		}
 	]
 };
+
+projects.display = function() {
+	"use strict";
+	var proj, currentProj, image;
+	for (proj in this.projects) {
+		currentProj = this.projects[proj];
+		$("#projects").append(HTMLprojectStart);
+		$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", currentProj.title));
+		$(".project-entry:last").append(HTMLprojectDates.replace("%data%", currentProj.dates));
+		$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", currentProj.description));
+		for(image in currentProj.images) {
+				$(".project-entry:last").append(HTMLprojectImage.replace("%data%", currentProj.images[image]));		
+		}
+	}
+};
+
+projects.display();
+
+var job = {
+	"employer" : "Rockwell Automation"
+};
+job.title = bio.role;
+job.dates = "Jan 2010 - Present";
+job.location = "Mayfield Heights, OH";
+job.description = "Development of Enterprise Software features delivering customer valued content in new releases of Rockwell Automation's LogixDesigner software suite.";
+
+
+var work = {
+	 "jobs": [job,	
+			 {
+				"employer" : "Rockwell Automation",
+				"title" : "Software Co-op",
+				"dates" : "Jan 2008 - Aug 2009",
+				"location" : "Mayfield Heights, OH",
+				"description" : "Software Co-op for the RsLogix5000 development team working on low hanging fruit projects in C++ and C#, as well as learning object oriented desing principles and applying them."		
+			}
+		]
+};
+
+work.display = function(){
+	var job, currentJob, formEmployer, formTitle, formEmployerTitle, formDates, formDesc;
+	for (job in this.jobs) {
+		currentJob = this.jobs[job];
+		$("#workExperience").append(HTMLworkStart);
+		formEmployer = HTMLworkEmployer.replace("%data%", currentJob.employer);
+		formTitle = HTMLworkTitle.replace("%data%", currentJob.title);
+		formEmployerTitle = formEmployer + formTitle;
+		$(".work-entry:last").append(formEmployerTitle);
+		formDates = HTMLworkDates.replace("%data%", currentJob.dates);
+		$(".work-entry:last").append(formDates);
+		formDesc = HTMLworkDescription.replace("%data%", currentJob.description);
+		$(".work-entry:last").append(formDesc);
+	}
+};
+
+work.display();
 
 var trips = {
 	"trip" : [
@@ -122,85 +176,34 @@ var trips = {
 	]
 };
 
-projects.display = function() {
-	for (var proj in projects.projects) {
-		var currentProj = projects.projects[proj];
-		$("#projects").append(HTMLprojectStart);
-		$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", projects.projects[proj].title));
-		$(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[proj].dates));
-		$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[proj].description));
-		if(currentProj.images.length > 0) {
-			for(image in currentProj.images) {
-				$(".project-entry:last").append(HTMLprojectImage.replace("%data%", currentProj.images[image]));		
-			}		
-		}
-	}
-}
 
-var schools = {};
-schools["school"] = '<div class="education-entry">"The Ohio State University"</div>';
-schools["years"] = [2004, 2005, 2006,2007, 2008, 2009];
-schools["location"] = "Columbus, OH"; 
-schools["degree"] = "Bachelors of Science";
-schools["major"] = "Computer Science and Engineering";
-schools["url"] = "www.osu.edu";
+var school = {};
+school["name"] = '<div class="education-entry">"The Ohio State University"</div>';
+school["dates"] = 2009;
+school["location"] = "Columbus, OH"; 
+school["degree"] = "Bachelors of Science";
+school["majors"] = ["Computer Science and Engineering"];
+school["url"] = "http://www.osu.edu";
 
 
 var education ={
 	"schools" : [
-		schools
+		school
 	],
 	"onlineCourses" : [
 		{
 			"name" : "Udacity",
 			"major" : "Front End Wed Development",
-			"gradDate" : 2015,
+			"date" : 2015,
 			"url" : "https://www.udacity.com/course/nd001"
 		}
 	]
 };
 
-var header= {}
-
-header.display = function(){
-	$("#header").append(formWelcome);
-	$("#header").append(formPic);
-	$("#header").prepend(formattedRole);
-	$("#header").prepend(formattedName);
-	if(bio.skills.length > 0) {
-		$("#header").append(HTMLskillsStart);
-		for (var i = 0; i< bio.skills.length; i++) {
-			var formSkills = HTMLskills.replace("%data%", bio.skills[i]);
-			$("#skills").append(formSkills);
-		};
-	};
-	$("#topContacts").append(formCont);
-	$("#topContacts").append(HTMLgithub.replace("%data%", "https://github.com/mttchrry/"));
-	$("#topContacts").append(HTMLmobile.replace("%data%", "508-9397"));
-	$("#topContacts").append(HTMLlocation.replace("%data%", "Cleveland, OH"));
-};
-
-$("#education").append(education.schools.school);
-
-function displayJobs(){
-	for (job in jobs) {
-		var formStart = HTMLworkStart.replace("%data%", jobs[job].years[0]);
-		$("#workExperience").append(HTMLworkStart);
-		var formEmployer = HTMLworkEmployer.replace("%data%", jobs[job].employer);
-		var formTitle = HTMLworkTitle.replace("%data%", jobs[job].position);
-		var formEmployerTitle = formEmployer + formTitle;
-		$(".work-entry:last").append(formEmployerTitle);
-
-		var formDates = HTMLworkDates.replace("%data%", jobs[job].years);
-		$(".work-entry:last").append(formDates);
-
-		var formDesc = HTMLworkDescription.replace("%data%", jobs[job].description);
-		$(".work-entry:last").append(formDesc);
-	}
-};
+$("#education").append(education.schools[0].name);
 
 function inName(name) {
-	var names = name.trim().split(" ");
+	var names = bio.name.trim().split(" ");
 	var firstname = names[0].slice(0,1)
 	names[0] = firstname.toUpperCase()
 	 + names[0].slice(1).toLowerCase();
@@ -212,9 +215,6 @@ $(document).click(function(loc) {
 	logClicks(loc.pageX, loc.pageY);
 });
 
-header.display();
-displayJobs();
-projects.display();
 $("#main").append(internationalizeButton);
 $("#mapDiv").append(googleMap);
 

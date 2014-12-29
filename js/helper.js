@@ -97,7 +97,7 @@ https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
 
-
+var locationIndex = 0 
 /*
 Start here! initializeMap() is called when page is loaded.
 */
@@ -123,24 +123,25 @@ function initializeMap() {
     var locations = [];
 
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+    locations.push(bio.contacts[0].location);
 
     // iterates through school locations and appends each location to
     // the locations array
     for (var school in education.schools) {
       locations.push(education.schools[school].location);
+      console.log(education.schools[school].location);
     }
 
     // iterates through work locations and appends each location to
     // the locations array
-    for (var job in jobs) {
-      locations.push(jobs[job].location);
+    for (var job in work.jobs) {
+      locations.push(work.jobs[job].location);
+      console.log(work.jobs[job].location);
     }
 
     for (var trip in trips.trip)
     {
       locations.push(trips.trip[trip].location);
-      console.log(trips.trip[trip].location);
     }
     return locations;
   }
@@ -195,45 +196,45 @@ function initializeMap() {
       createMapMarker(results[0]);
     }
     console.log(status);
-    if (status == "OVER_QUERY_LIMIT") {
-      time.delay(3);
-    }
   }
 
   /*
   pinPoster(locations) takes in the array of locations created by locationFinder()
   and fires off Google place searches for each location
   */
-  function pinPoster(locations) {
-
-    // creates a Google place search service object. PlacesService does the work of
-    // actually searching for location data.
+  function pinNextPoster(locations) {
     var service = new google.maps.places.PlacesService(map);
+    if(locationIndex < locations.length)
+    {
+      var request = {
+        query: locations[locationIndex]
+      };
+      service.textSearch(request, callback);
+      locationIndex = locationIndex + 1;
+    }  
+  }
 
+  function pinPoster(locations) {
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
-
-      // the search request object
-      var request = {
-        query: locations[place]
-      };
-
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
-      service.textSearch(request, callback);
-    }
+      setTimeout(function () {
+        pinNextPoster(locations);
+      }, (500 * place));
+      }
   }
+
+
 
   // Sets the boundaries of the map based on pin locations
   window.mapBounds = new google.maps.LatLngBounds();
 
   // locations is an array of location strings returned from locationFinder()
   locations = locationFinder();
-
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array
   pinPoster(locations);
-
 }
 
 /*
