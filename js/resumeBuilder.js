@@ -4,16 +4,20 @@ var contact = {
     "mobile" : "419-you-wish",
     "email" : "osumathias@yahoo",
     "github" : "https://github.com/mttchrry/",
-    "twitter" : "",
+    "twitter" : "Twitless",
     "location" : "Cleveland, OH"
 };
 
 var bio = {
-	"name" : "Matt Cherry",
+	"name" : "Matthew Cherry",
 	"role" : "Software Engineer",
 	"contacts" : [contact],
 	"welcomeMessage" : "Why, Hello there.",
-	"skills" : ["Mad skillz yo", "Yep, the maddest"],
+	"skills" : ["Mad skillz yo", 
+		"Yep, the maddest", 
+		"Object Oriented Programming",
+		"C++, JavaScript, C#, Java, Python",
+		"Visual Studio, Sublime Text 2, NetBeans"],
 	"biopic" : "https://media.licdn.com/media/p/2/000/0ac/1b3/03c6983.jpg"
 };
 
@@ -23,6 +27,10 @@ bio.display = function(){
 	  formEmail = HTMLemail.replace("%data%", this.contacts[0].email),
 	  formPic = HTMLbioPic.replace("%data%", this.biopic),
 	  formWelcome = HTMLWelcomeMsg.replace("%data%", this.welcomeMessage),
+	  formGithub = HTMLgithub.replace("%data%", this.contacts[0].github),
+	  formMobile = HTMLmobile.replace("%data%", this.contacts[0].mobile),
+	  formLocation = HTMLlocation.replace("%data%", this.contacts[0].location),
+	  formTwitter = HTMLtwitter.replace("%data%", this.contacts[0].twitter),
 	  i = 0;
 	$("#header").append(formWelcome);
 	$("#header").append(formPic);
@@ -34,10 +42,16 @@ bio.display = function(){
 			$("#skills").append(HTMLskills.replace("%data%", this.skills[i]));
 		};
 	};
+	$("#topContacts").append(formMobile);
 	$("#topContacts").append(formEmail);
-	$("#topContacts").append(HTMLgithub.replace("%data%", this.contacts[0].github));
-	$("#topContacts").append(HTMLmobile.replace("%data%", this.contacts[0].mobile));
-	$("#topContacts").append(HTMLlocation.replace("%data%", this.contacts[0].location));
+	$("#topContacts").append(formGithub);
+	$("#topContacts").append(formTwitter);
+	$("#topContacts").append(formLocation);
+	$("#footerContacts").append(formMobile);
+	$("#footerContacts").append(formEmail);
+	$("#footerContacts").append(formGithub);
+	$("#footerContacts").append(formTwitter);
+	$("#footerContacts").append(formLocation);
 };
 
 bio.display();

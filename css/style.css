@@ -15,7 +15,7 @@
 
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  color: #800F0F;
   line-height: 48px;
   display: inline;
 }
@@ -87,16 +87,16 @@ a {
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: #800F0F;
   display: none;
 }
 
-.orange {
-  background-color: #F5AE23;
+.red {
+  background-color: #F00;
 }
 
-.orange-text {
-  color: #F5AE23;
+.red-text {
+  color: #800F0F;
 }
 
 .white-text {
@@ -116,7 +116,7 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: #6F6F6F;
 }
 
 .flex-box {
