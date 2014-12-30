@@ -185,11 +185,11 @@ var trips = {
 		{
 			"location" : "Miami, Fl",
 			"date" : "Nov, 2013"
-		},
+		},*/
 		{
 			"location" : "Toledo, OH",
 			"date" : "Aug, 1986"
-		}*/
+		}
 	]
 };
 
@@ -224,11 +224,11 @@ education.display = function() {
 		$("#education").append(HTMLschoolStart);
 
 		for(school in education.schools) {
-			collegEntry = '<div class="row">'
+			collegeEntry = '<div class="row">'
 			collegeName = HTMLschoolName.replace("%data%", education.schools[school].name);
 			collegeDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
 			collegeDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-			collegeEntry = collegeName + collegeDegree + collegeDates; 
+			collegeEntry = collegeEntry + collegeName + collegeDegree + collegeDates; 
 			for (major in education.schools[school].majors) {
 				collegeMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
 				collegeEntry = collegeEntry + collegeMajor;
@@ -243,7 +243,7 @@ education.display = function() {
 				onlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[school].school);
 				//$(".education-entry").append(onlineTitle+onlineSchool);
 				onlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[school].date);
-				onlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[school].url);
+				onlineURL = HTMLonlineURL.replace(/%data%/g, education.onlineCourses[school].url);
 				$(".education-entry").append(onlineTitle+onlineSchool+onlineDates+onlineURL);
 			}
 		}
