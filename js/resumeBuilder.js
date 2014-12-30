@@ -1,4 +1,5 @@
-
+// all of the JSON objects and functionality for displaying them on my 
+// online resume. 
 
 var contact = {
     "mobile" : "419-you-wish",
@@ -90,6 +91,7 @@ projects.display = function() {
 
 projects.display();
 
+// example of differing ways to build JSON objects.
 var job = {
 	"employer" : "Rockwell Automation"
 };
@@ -129,9 +131,10 @@ work.display = function(){
 
 work.display();
 
+//additional vacation trips to map out optionally. 
 var trips = {
 	"trip" : [
-		{
+		/*{
 			"location" : "Cancun, Mexico",
 			"date" : "Nov, 2014"
 		},
@@ -186,7 +189,7 @@ var trips = {
 		{
 			"location" : "Toledo, OH",
 			"date" : "Aug, 1986"
-		}
+		}*/
 	]
 };
 
@@ -215,32 +218,33 @@ var education ={
 };
 
 education.display = function() {
-	var collegeName, collegeDegree, collegeMajor, collegeDates, major,
-		onlineTitle, onlineSchool, onlineDates, onlineURL, schoolschoolIter;
+	var collegeName, collegeDegree, collegeMajor, collegeDates, major, 
+		onlineTitle, onlineSchool, onlineDates, onlineURL, schools, collegeEntry;
 	if (education.schools.length > 0 || education.onlineCourses.length > 0) {
 		$("#education").append(HTMLschoolStart);
 
 		for(school in education.schools) {
+			collegEntry = '<div class="row">'
 			collegeName = HTMLschoolName.replace("%data%", education.schools[school].name);
 			collegeDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-			$(".education-entry").append(collegeName+collegeDegree);
 			collegeDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-			$(".education-entry").append(collegeDates);
+			collegeEntry = collegeName + collegeDegree + collegeDates; 
 			for (major in education.schools[school].majors) {
 				collegeMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
-				$(".education-entry").append(collegeMajor);
-			}
+				collegeEntry = collegeEntry + collegeMajor;
+			} 
+			collegeEntry = collegeEntry + '</div>';
+			$(".education-entry").append(collegeEntry);
 		}
 		if(education.onlineCourses.length > 0) {
 			$(".education-entry").append(HTMLonlineClasses);
 			for(school in education.onlineCourses) {
 				onlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[school].title);
 				onlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[school].school);
-				$(".education-entry").append(onlineTitle+onlineSchool);
+				//$(".education-entry").append(onlineTitle+onlineSchool);
 				onlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[school].date);
-				$(".education-entry").append(onlineDates);
 				onlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[school].url);
-				$(".education-entry").append(onlineURL);
+				$(".education-entry").append(onlineTitle+onlineSchool+onlineDates+onlineURL);
 			}
 		}
 	}
