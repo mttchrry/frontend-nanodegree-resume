@@ -36,13 +36,14 @@ h3 {
 }
 
 h4 {
+  padding-top: 10px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px;
   color: #4A4A4A;
   line-height: 17px;
 }
 
-h2, h3, h4, h5 {
+h2, h3, h5 {
   padding:10px;
   padding-left: 5%;
   padding-right: 5%;
@@ -111,7 +112,7 @@ a {
 }
 
 .dark-gray {
-  background-color: #4A4A4A;
+  background-color: #6F6F6F;
 }
 
 /* TODO: Replace with image later */

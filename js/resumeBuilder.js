@@ -192,7 +192,7 @@ var trips = {
 
 
 var school = {};
-school["name"] = '<div class="education-entry">"The Ohio State University"</div>';
+school["name"] = "The Ohio State University";
 school["dates"] = 2009;
 school["location"] = "Columbus, OH"; 
 school["degree"] = "Bachelors of Science";
@@ -206,15 +206,46 @@ var education ={
 	],
 	"onlineCourses" : [
 		{
-			"name" : "Udacity",
-			"major" : "Front End Wed Development",
+			"school" : "Udacity",
+			"title" : "Front End Wed Development",
 			"date" : 2015,
 			"url" : "https://www.udacity.com/course/nd001"
 		}
 	]
 };
 
-$("#education").append(education.schools[0].name);
+education.display = function() {
+	var collegeName, collegeDegree, collegeMajor, collegeDates, major,
+		onlineTitle, onlineSchool, onlineDates, onlineURL, schoolschoolIter;
+	if (education.schools.length > 0 || education.onlineCourses.length > 0) {
+		$("#education").append(HTMLschoolStart);
+
+		for(school in education.schools) {
+			collegeName = HTMLschoolName.replace("%data%", education.schools[school].name);
+			collegeDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+			$(".education-entry").append(collegeName+collegeDegree);
+			collegeDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+			$(".education-entry").append(collegeDates);
+			for (major in education.schools[school].majors) {
+				collegeMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
+				$(".education-entry").append(collegeMajor);
+			}
+		}
+		if(education.onlineCourses.length > 0) {
+			$(".education-entry").append(HTMLonlineClasses);
+			for(school in education.onlineCourses) {
+				onlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[school].title);
+				onlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[school].school);
+				$(".education-entry").append(onlineTitle+onlineSchool);
+				onlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[school].date);
+				$(".education-entry").append(onlineDates);
+				onlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[school].url);
+				$(".education-entry").append(onlineURL);
+			}
+		}
+	}
+}
+education.display();
 
 function inName(name) {
 	var names = bio.name.trim().split(" ");
