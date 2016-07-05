@@ -5,6 +5,7 @@ var contact = {
     "mobile" : "419-508-9397",
     "email" : "mttchrry@gmail.com",
     "github" : "https://github.com/mttchrry/",
+    "twitter" : "None",
     "location" : "Los Angeles, CA"
 };
 
