@@ -12,7 +12,7 @@ var bio = {
 	"name" : "Matthew Cherry",
 	"role" : "Senior Software Engineer",
 	"contacts" : [contact],
-	"welcomeMessage" : "An adaptable software engineer seeking an opportunity to make the world a better place through development of new technologies and products.  Eager to expand my skills through challenging and worthwhile projects.",
+	"welcomeMessage" : "An adaptable software engineer who gets projects DONE! Seeking an opportunity to make the world a better place through development of new technologies and products.",
 	"skills" : ["C++, C#, Java", 
 		"Agile Development of a Desktop Application", 
 		"Self-Learned web development coursework",
