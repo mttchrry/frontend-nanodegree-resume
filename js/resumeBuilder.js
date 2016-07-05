@@ -2,22 +2,21 @@
 // online resume. 
 
 var contact = {
-    "mobile" : "419-you-wish",
-    "email" : "osumathias@yahoo",
+    "mobile" : "419-508-9397",
+    "email" : "mttchrry@gmail.com",
     "github" : "https://github.com/mttchrry/",
-    "twitter" : "Twitless",
-    "location" : "Cleveland, OH"
+    "location" : "Los Angeles, CA"
 };
 
 var bio = {
 	"name" : "Matthew Cherry",
-	"role" : "Software Engineer",
+	"role" : "Senior Software Engineer",
 	"contacts" : [contact],
-	"welcomeMessage" : "Why, Hello there.",
-	"skills" : ["Mad skillz yo", 
-		"Yep, the maddest", 
-		"Object Oriented Programming",
-		"C++, JavaScript, C#, Java, Python",
+	"welcomeMessage" : "An adaptable software engineer seeking an opportunity to make the world a better place through development of new technologies and products.  Eager to expand my skills through challenging and worthwhile projects.",
+	"skills" : ["C++, C#, Java", 
+		"Agile Development of a Desktop Application", 
+		"Self-Learned web development coursework",
+		"JavaScript,  Java, Python, Google App Engine",
 		"Visual Studio, Sublime Text 2, NetBeans"],
 	"biopic" : "https://media.licdn.com/media/p/2/000/0ac/1b3/03c6983.jpg"
 };
@@ -210,9 +209,15 @@ var education ={
 	"onlineCourses" : [
 		{
 			"school" : "Udacity",
-			"title" : "Front End Wed Development",
+			"title" : "Front End Web Development",
 			"date" : 2015,
 			"url" : "https://www.udacity.com/course/nd001"
+		},
+		{
+			"school" : "Udacity",
+			"title" : "Full Stack Web Development",
+			"date" : 2016,
+			"url" : "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004"
 		}
 	]
 };
